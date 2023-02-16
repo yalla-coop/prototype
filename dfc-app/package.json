@@ -3,9 +3,10 @@
   "version": "0.0.2",
   "description": "",
   "scripts": {
-    "dev": "nodemon --exec yarn start -e js,html,css --watch src --ignore configuration.js",
+    "dev": "nodemon --exec yarn startDev -e js,html,css --watch src --ignore configuration.js",
     "devwithlink": "make install && make link && make watch-link && yarn dev",
-    "start": "node --inspect=0.0.0.0:9229 ./src/server/app.js"
+    "startDev": "node --inspect=0.0.0.0:9229 ./src/server/app.js",
+    "start": "node ./src/server/app.js"
   },
   "author": "",
   "license": "AGPLV3",
