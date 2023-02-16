@@ -13,3 +13,5 @@ RUN yarn global add yalc
 
 # overide by compose if volume targeted src
 ADD src  ./src
+
+EXPOSE 9229

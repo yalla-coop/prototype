@@ -64,8 +64,10 @@ services:
       - dfc
     ports:
       - "8080:8080"
+      - "9229:9229"
     expose:
       - "8080"
+      - "9229"
     command: bash -c "yarn install && yarn run dev"
   dfc-ui:
     build:
