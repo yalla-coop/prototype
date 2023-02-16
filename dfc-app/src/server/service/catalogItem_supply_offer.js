@@ -798,9 +798,9 @@ class CatalogService {
       try {
         await this.init();
         // console.log(user['dfc:importInProgress']);
-        if (user['dfc:importInProgress'] == true) {
-          reject(new Error("import in progress. Not possible to process an other"))
-        } else {
+        //if (user['dfc:importInProgress'] == true) {
+        //  reject(new Error("import in progress. Not possible to process an other"))
+        //} else {
           const responseProgressOn = await fetch(user['@id'], {
             method: 'PATCH',
             body: JSON.stringify({
@@ -902,7 +902,7 @@ class CatalogService {
             })
           ]);
 
-          // console.log('sourceResponseObject',sourceResponseObject);
+          console.log('sourceResponseObject',sourceResponseObject);
           // console.log('sourceResponseObject stringify',JSON.stringify(sourceResponseObject));
 
 
@@ -921,10 +921,16 @@ class CatalogService {
 
           if (sourceObject.version == "1.5" || sourceObject.version == "1.6" || sourceObject.version == "1.7") {
             // const affiliates = Array.isArray(sourceResponseObject['dfc-b:affiliates'])?sourceResponseObject['dfc-b:affiliates'][0]:sourceResponseObject['dfc-b:affiliates']
+            //const platformUser = await ldpNavigator.resolveById('dfc-b:Person');
+            //const platformUser = await ldpNavigator.resolveById('person/personId');
+            const platformUser = await ldpNavigator.resolveById('http://maPlateformeNationale/person/personId');
+            
+            /*
             const platformUser = await ldpNavigator.findInMemory({
               '@type': 'dfc-b:Person'
             });
-            // console.log('platformUser',platformUser);
+            */
+            console.log('platformUser',platformUser);
             console.log('dereference BEFORE');
             const platformUserDereferences = await ldpNavigator.dereference(platformUser, {
               p: 'dfc-b:affiliates',
@@ -940,7 +946,7 @@ class CatalogService {
             })
             // console.log('dereference AFTER');
 
-            // console.log('platformUserDereferences',platformUserDereferences);
+             console.log('platformUserDereferences',platformUserDereferences);
             // console.log("platformUserDereferences['dfc-b:affiliates']['dfc-b:manages']",JSON.stringify(platformUserDereferences['dfc-b:affiliates']['dfc-b:manages']));
 
             for (var manage of platformUserDereferences['dfc-b:affiliates']['dfc-b:manages']) {
@@ -1007,7 +1013,7 @@ class CatalogService {
 
           resolve(out)
           // resolve([]);
-        }
+        //}
       } catch (e) {
         const responseProgressOn = await fetch(user['@id'], {
           method: 'PATCH',
